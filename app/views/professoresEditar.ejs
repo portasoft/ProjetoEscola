@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<title>FATEC</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body style="background-color:whitesmoke" onload="checkCookies()">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right"><i class="fa fa-university"></i></span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row" >
+    <!-- <div class="w3-col s4">
+      <img src="/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+    </div> -->
+    <h3 ><i class="fa fa-university"></i><strong>  SISTEMA ESCOLA</strong> </h3>
+    <div class="w3-col s8 w3-bar"> 
+
+     
+            <a href="/professoresListar" class="w3-bar-item w3-button btn-lg"><i class="fa fa-users"></i></a>
+            <a href="/disciplinasListar" class="w3-bar-item w3-button btn-lg"><i class="fa fa-list-alt "></i></a>
+            <!-- <a href="#" class="w3-bar-item w3-button btn-lg"><i class="fa fa-edit "></i></a> -->
+    </div>
+  </div>
+  <hr>
+  
+  <div class="w3-bar-block" >
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+
+    <a href="/" class="w3-bar-item w3-button w3-padding btn-lg"><i class="fa fa-home fa-fw"></i>  HOME</a>
+    <a href="/professoresListar" class="w3-bar-item w3-button w3-padding w3-blue btn-lg"><i class="fa fa-users fa-fw"></i>  PROFESSORES</a>
+
+    <a href="/disciplinasListar" class="w3-bar-item w3-button w3-padding btn-lg"><i class="fa fa-list-alt  fa-fw"></i>  DISCIPLINAS</a>
+  
+
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:350px;margin-top:43px;">
+   
+   
+  
+ <br><br>
+
+  <nav>
+    
+    
+    <br><br>
+</nav>
+
+<div class="container-fluid">
+   
+ 
+        <h3><i  class="fa fa-users"></i> <p id="demo" ></p> </h3>
+      
+<!-- aponta para o roteamento-->        
+        <form action="/professor/salvar" method="post">
+            <h5 style="border-bottom: 1px #c5c5c5 solid;"></h5>
+
+            <div class="form-group row">
+                <div class="col-md-1">
+                    <label>Codigo </label>
+                    <input type="text" value="<%= professor[0].pro_codigo%>" id="pro_codigo" name="pro_codigo" class="form-control" placeholder="Codigo" size="5" readonly>
+                </div>
+                <br>
+                <script>
+                        function checkCookies() {
+                            var text = "";
+                        
+                            if (document.getElementById('pro_codigo').value =="") {
+                               text = "CADASTRAR PROFESSOR";
+                            } else {
+                                text = "ALTERAR PROFESSOR";
+                            }
+                        
+                            document.getElementById("demo").innerHTML = text;
+                        }
+                        </script>
+                <div class="col-md-5">
+                    <label>Nome </label>
+                    <input type="text" value="<%= professor[0].pro_nome%>" name="pro_nome" class="form-control" placeholder="Nome" size="30" maxlength="30" required>
+                </div>
+                <br>
+                <div class="col-md-3">
+                    <label>Apelido </label>
+                    <input type="text" class="form-control" value="<%= professor[0].pro_apelido%>" name="pro_apelido" placeholder="Apelido" size="10" maxlength="10" required>
+                </div>
+                <br> <br>  <br>
+                <br> 
+                 <br>   
+                <div class="col-md-4">
+                    <label>Formação </label>
+                    <input type="text" class="form-control" value="<%= professor[0].pro_formacao%>" name="pro_formacao" placeholder="Formação" size="20" maxlength="20" required>
+                </div>
+               
+                 
+                <div class="col-md-2">
+                    <label>CPF </label>
+                    <input type="text" class="form-control" value="<%= professor[0].pro_cpf%>" name="pro_cpf" placeholder="CPF" size="15" maxlength="15" required>
+                </div>
+                <br>
+
+                <div class="col-md-2">
+                    <label>Celular </label>
+                    <input type="text" class="form-control" value="<%= professor[0].pro_celular%>" name="pro_celular" placeholder="Celular" size="15" maxlength="15" required>
+                </div>
+                <br>    
+                <div class="col-md-1">
+                    <label>Ano </label>
+                    <input type="text" class="form-control" value="<%= professor[0].pro_anonascimento%>" name="pro_anonascimento" placeholder="Ano" size="5" maxlength="5" required>
+                </div>
+                <br>         
+                <br>    <br>    <br>  
+            </div>
+            <div class="form-group row">
+           
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary btn-lg">Salvar </button>                    
+                </div>
+               
+                <div class="col-md-2">
+                    <a class="btn btn-secondary btn-lg" href="/professoresListar">Voltar</a>
+                </div>
+            </div>
+        </form>
+        <hr>
+    </div>
+
+
+
+	<!-- Carrega os scripts e bibliotecas javascript -->
+	<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script> 
+	<script type="text/javascript" src="vendor/popper.js/dist/umd/popper.js"></script> 
+	<script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+
+
+  
+  
+  
+  <!-- End page content -->
+</div>
+
+
+
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>

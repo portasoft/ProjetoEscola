@@ -1,0 +1,77 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+CREATE SCHEMA IF NOT EXISTS `dados2182n` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `dados2182n` ;
+
+-- -----------------------------------------------------
+-- Table `dados2182n`.`professor`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `dados2182n`.`professor` (
+  `pro_codigo` INT NOT NULL AUTO_INCREMENT ,
+  `pro_nome` VARCHAR(30) NOT NULL ,
+  `pro_apelido` VARCHAR(10) NULL ,
+  `pro_celular` VARCHAR(15) NULL ,
+  `pro_cpf` VARCHAR(15) NULL ,
+  `pro_formacao` VARCHAR(15) NULL ,
+   `pro_anonascimento` INT NULL ,
+  PRIMARY KEY (`pro_codigo`))
+	ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dados2182n`.`disciplina`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `dados2182n`.`disciplina` (
+  `dis_codigo` INT NOT NULL AUTO_INCREMENT ,
+  `dis_nome` VARCHAR(20) NOT NULL ,
+  `dis_area` VARCHAR(20) NULL ,
+  `dis_aulas` INT NULL ,
+  `dis_local`  INT NULL ,
+   `pro_codigo`  INT NOT NULL ,
+  PRIMARY KEY (`dis_codigo`),
+  INDEX `fk_professor_disciplina` (`pro_codigo` ASC) ,
+  CONSTRAINT `fk_professor_disciplina`
+    FOREIGN KEY (`pro_codigo`)
+    REFERENCES `dados2182n`.`professor` (`pro_codigo` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+	ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+
+  
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+use dados2182n;
+
+-- -----------------------------------------------------
+-- Table `dados2182n`.`professor`
+-- -----------------------------------------------------
+insert into dados2182n.professor 
+		(pro_nome, pro_formacao, pro_cpf, pro_celular, pro_apelido,pro_anonascimento) 
+values 	('NETO CLEMENTINO', 'FRONT-END', '12345678900','1699999-8888', 'NETO', '77'),
+		('TRAINA', 'LINUX', '09876543212','1677777-8888', 'TRAINA', '45'),
+		('CARLAO', 'ENGENHARIA DE SOFTWARE', '99868576543','1688888-8888', 'TIO CARLAO', '60');
+	
+
+
+-- -----------------------------------------------------
+-- Table `dados2182n`.`disciplina`
+-- -----------------------------------------------------
+insert into dados2182n.disciplina 
+		(dis_nome,dis_local,dis_aulas,dis_area, pro_codigo) 
+values 	('FRONT-END', '5', '2', 'VISUAL','1'),
+		('LINUX', '5', '2', 'SEGURANCA','2'),
+		('ENGENHARIA DE SOFTWARE', '5', '2', 'DEV','3');
+		
+		
+		
+
+		
